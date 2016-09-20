@@ -1,0 +1,12 @@
+body{
+	color: gray;
+	font: 16px "微软雅黑";
+}
+span{
+	float: left;
+	padding: 0px 30px;
+	height: 50px;
+	line-height: 50px;
+	border: 2px solid gainsboro;
+	margin-right: 20px;
+}

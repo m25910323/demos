@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			div{
+				width: 80px;
+				height: 100px;
+				border: 1px solid #000;
+				float: left;
+				margin-right: 20px;
+				position: relative;
+			}
+			ul{
+				width: 150px;
+				height: 200px;
+				margin: 0px;
+				padding: 0px;
+				list-style: none;
+				display: none;
+				border:1px solid pink;
+				position: absolute;
+			}
+		</style>
+	</head>
+	<body>
+		<div id='div1'>
+			<ul id="mask1">
+				<li>1</li>
+				<li>2</li>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</ul>
+		</div>
+		<div id="div2">
+			<ul id="mask2">
+				<li>a</li>
+				<li>s</li>
+				<li>d</li>
+				<li>f</li>
+				<li>g</li>
+			</ul>
+		</div>
+		
+		
+	</body>
+	<script>
+		window.onload=function(){
+			
+			var div1=document.getElementById('div1');
+			var div2=document.getElementById('div2');
+			var mask1=document.getElementById('mask1');
+			var mask2=document.getElementById('mask2');
+			var ml=div1.getBoundingClientRect().left;
+			var mt=div1.getBoundingClientRect().top;
+			var ml2=div2.getBoundingClientRect().left;
+			var mt2=div2.getBoundingClientRect().top;
+			console.log(ml);
+			document.oncontextmenu=function(e){
+				console.log('a');
+				e.preventDefault();
+			}
+			document.addEventListener('click',hid);
+			div1.addEventListener('contextmenu',function(e){
+				hid();
+				mask1.style.display="block";
+				mask1.style.left=e.clientX-ml+'px';
+				mask1.style.top=e.clientY-mt+'px';
+			});
+			div2.addEventListener('contextmenu',function(e){
+				hid();
+				mask2.style.display="block";
+				mask2.style.left=e.clientX-ml2+'px';
+				mask2.style.top=e.clientY-mt2+'px';
+			});
+			
+//			
+			mask1.addEventListener("contextmenu",function(e){
+				e.cancelBubble=true;
+				e.preventDefault();
+			})
+			function hid(){
+				mask1.style.display="none";
+				mask2.style.display="none";
+			}
+		}
+	</script>
+</html>

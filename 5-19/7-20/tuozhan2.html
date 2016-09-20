@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			img{
+				display: block;
+				margin-top: 150px;
+				position: absolute;
+			}
+		</style>
+	</head>
+	<body>
+		<img src="1.jpg">
+	</body>
+	<script>
+		window.onload=function(){
+			document.onmousewheel=function(e){
+				var img=document.getElementsByTagName('img')[0];
+				if(e.wheelDelta>0){
+					img.style.width=img.offsetWidth+20+"px";
+					
+				}else{
+					img.style.width=img.offsetWidth-20+"px";
+				}
+				img.style.left=(window.innerWidth-img.offsetWidth)/2+'px';
+			}
+		}
+	</script>
+</html>

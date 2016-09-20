@@ -1,0 +1,18 @@
+dl,dd{
+	margin: 0px;
+}
+dt{
+	height: 30px;
+	background-color: green;
+	color: #fff;
+	line-height: 30px;
+}
+dd{
+	height: 40px;
+	line-height: 40px;
+	border-bottom: 1px solid pink;;
+}
+.visi{
+	display: inline-block;
+	display: none;
+}

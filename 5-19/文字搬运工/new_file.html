@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#left,#right{
+				width: 400px;
+				height: 300px;
+				border: 1px solid black;
+				float: left;
+				word-wrap: break-word;
+				position: relative;
+			}
+			input{
+				float: left;
+				margin:auto;
+			}
+			.bt{
+				width: 150px;
+				height: 100px;
+				float: left;
+				margin-top: 100px;
+				margin-top: 100px;
+				padding-left: 100px;
+			}
+			.fontCont{
+				width: 50px;
+				height: 30px;
+				background-color: pink;
+				color: #fff;
+				float: left;
+				position: absolute;
+				top: 250px;
+				left:150px;
+				text-align: center;
+				line-height: 30px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id='left'>
+			<div id="leftcon"></div>
+			<span class="fontCont"></span>
+		</div>
+		<div class="bt">
+			<input type="button" value="搬"/>
+			<input type="button" value="<--"/>
+		</div>
+		<div id="right">
+			<div id="rightcon"></div>
+			<span class="fontCont"></span>
+		</div>
+		
+	</body>
+	<script>
+		window.onload=function(){
+			var leftcon=document.getElementById('leftcon');
+			var rightcon=document.getElementById('rightcon');
+			var button=document.getElementsByTagName('input');
+			var fontCont=document.getElementsByClassName('fontCont');
+			var timer=null;
+			var timer2=null;
+			var onoff=false;
+			leftcon.innerHTML="大风起兮云飞扬,威加海内兮归故乡，安得猛士兮守四方";
+//			var lengthr=rightcon.innerHTML.length;
+			var lengthl=leftcon.innerHTML.length;
+			fontCont[0].innerHTML=lengthl+"/"+lengthl;
+			fontCont[1].innerHTML=0+"/"+lengthl;
+			button[0].onclick=function(){
+				clearInterval(timer);
+				clearInterval(timer2);
+				if(onoff==false){
+					this.value="停";
+					timer=setInterval(move,100);
+					onoff=true;
+				}else{
+					this.value="搬";
+					onoff=false;
+				}
+			}
+			button[1].onclick=function(){
+				clearInterval(timer);
+				timer2=setInterval(move2,100);
+			}
+			function move(){
+				var lengthr=rightcon.innerHTML.length;
+				var con=leftcon.innerHTML.substring(1);
+				var cut=leftcon.innerHTML.slice(0,1);
+				var  num=leftcon.innerHTML.length-1;
+				fontCont[0].innerHTML=num+"/"+lengthl;
+				fontCont[1].innerHTML=(lengthl-num)+"/"+lengthl;
+				leftcon.innerHTML=con;
+				rightcon.innerHTML+=cut;
+				if(leftcon.innerHTML==""){
+					clearInterval(timer);
+					button[0].value="搬完啦";
+				}
+			}
+			function move2(){
+				var lengthr=rightcon.innerHTML.length;
+				var lengthl1=leftcon.innerHTML.length;
+				var con=rightcon.innerHTML.slice(lengthr-1,lengthr);
+				var cut=rightcon.innerHTML.slice(0,lengthr-1);
+				leftcon.innerHTML=con+leftcon.innerHTML;
+				rightcon.innerHTML=cut;
+				fontCont[0].innerHTML=leftcon.innerHTML.length+"/"+lengthl;
+				fontCont[1].innerHTML=rightcon.innerHTML.length+"/"+lengthl;
+				if(rightcon.innerHTML==""){
+					clearInterval(timer2);
+				}
+			}
+		}
+	</script>
+</html>

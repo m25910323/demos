@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style>
+		div{
+			width: 150px;
+			height: 150px;
+			border: 1px solid black;
+			display: none;
+		}
+		div.show{
+			display: block;
+		}
+		.active{
+			background-color: yellow;
+		}
+	</style>
+	<body>
+		<input type="button" value="按钮1"/ class="active">
+		<input type="button" value="按钮2"/>
+		<input type="button" value="按钮3"/>
+		<div class="show">11111111</div>
+		<div>2222222</div>
+		<div>33333</div>
+	</body>
+	<script>
+//		var inp=document.getElementsByTagName('input');
+//		var div=document.getElementsByTagName('div');
+//		for(var i=0;i<inp.length;i++){
+//			inp[i].index=i;
+//			inp[i].onclick=function(){
+//				for(var i=0;i<inp.length;i++){
+//					inp[i].className="";
+//					div[i].className="";
+//				}
+//				this.className="active";
+//				div[this.index].className="show";
+//			}
+//		}
+
+		function init(){
+			this.inp=document.getElementsByTagName('input');
+			this.div=document.getElementsByTagName('div');
+			var _this=this;
+			for(var i=0;i<this.inp.length;i++){
+				this.inp[i].index=i;
+				this.inp[i].onclick=function(){
+					_this.set(this);
+				};
+			}
+		}
+		
+
+		init.prototype.set=function(that){
+			for(var i=0;i<this.inp.length;i++){
+				this.inp[i].className="";
+				this.div[i].className="";
+			}
+			that.className="active";
+			this.div[that.index].className="show";
+		}
+		
+		
+		new init();
+	</script>
+</html>

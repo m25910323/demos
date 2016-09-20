@@ -1,0 +1,13 @@
+div{
+	width: 100px;
+	float: left;
+}
+span{
+	float: left;
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	color: #fff;
+	background-color: black;
+}

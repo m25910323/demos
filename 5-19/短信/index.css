@@ -1,0 +1,103 @@
+#iPhone {
+	margin: 0 auto;
+	width: 291px;
+	height: 593px;
+	background-image: url(img/iPhone.png);
+	padding-top: 90px;
+	box-sizing: border-box; 
+}
+#text { 
+	width: 238px;
+	height: 370px;
+	margin: 0 auto;
+}
+#qq { 
+	margin-left: 33px;
+	margin-top: 10px;
+	float: left; 
+}
+#message { 
+	width: 120px;
+	height: 20px;
+	margin-left: 15px;
+	margin-top: 10px;
+	border: none;
+	float: left;
+	outline: none; 
+}
+#btn { 
+	width: 50px;
+	height: 35px;
+	margin-left: 15px;
+	margin-top: 5px;
+	float: left; 
+}
+p { 
+	margin:0 0 5px; 
+	font-size:12px; 
+	font-family:'微软雅黑'; 
+	clear:both; 
+	position:relative; 
+	padding:4px; 
+}
+.color1 { 
+	background:#e7e5eb; 
+	color:#252329; 
+	margin-right:40px; 
+	float:left; 
+	left:30px; 
+}
+.color2 { 
+	background:#2bc71c; 
+	color:#f5feef; 
+	margin-right:30px; 
+	float:right; 
+}
+p img { 
+	position:absolute; 
+	top:0px; 
+}
+.color1 img { 
+	left:-28px; 
+}
+.color2 img { 
+	right:-28px; 
+}
+/*body{
+	margin: 0px;
+}
+.main{
+	margin: 0 auto;
+	width: 291px;
+	height: 593px;
+	background-image: url(img/iPhone.png);
+	padding-top: 90px;
+	box-sizing: border-box;
+}
+.mess{
+	width: 238px;
+	height: 370px;
+	margin: 0 auto;
+}
+span{
+	float: left;
+}
+.user{
+	margin-left: 33px;
+	margin-top: 10px;
+}
+input{
+	width: 120px;
+	height: 20px;
+	margin-left: 15px;
+	margin-top: 10px;
+	border: none;
+	float: left;
+	outline: none;
+}
+.send{
+	width: 50px;
+	height: 35px;
+	margin-left: 15px;
+	margin-top: 5px;
+}*/

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			div{
+				width: 100px;
+				height: 100px;
+				background-color: orange;
+				position: absolute;
+				top: 200px;
+				left: 200px;
+			}
+			#div1{
+				background-color: yellow;
+				position: absolute;
+				top: 300px;
+				left: 600px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="div1"></div>
+		<div id="div2"></div>
+		
+	</body>
+	<script>
+		window.onload=function(){
+			var div1=document.getElementById("div1");
+			var onoff=false;
+			var change=false;
+			var L,T,cx;
+			var divw_ori=div1.offsetWidth;
+			var divh_ori=div1.offsetHeight;
+			var divol_ori=div1.offsetLeft;
+			var divot_ori=div1.offsetTop;
+			div1.onmousedown=function(e){
+				onoff=true;
+				cx=e.clientX;
+				cy=e.clientY;
+				L=e.clientX-div1.offsetLeft;
+				T=e.clientY-div1.offsetTop;
+				if(e.clientX<this.offsetLeft+10){
+					change=-1;
+				}else if(e.clientX>this.getBoundingClientRect().right-10){
+					change=1;
+				}else if(e.clientY>this.getBoundingClientRect().bottom-10){
+					change=2;
+					
+				}else if(e.clientY<this.offsetTop+10){
+					change=-2;
+					console.log(-2);
+				}
+			}
+			document.onmousemove=function(e){
+				var dol1=div1.offsetLeft;
+				var dol2=div2.offsetLeft;
+				var dot1=div1.offsetTop;
+				var dot2=div2.offsetTop;
+				var dcw1=div1.clientWidth;
+				var dcw2=div2.clientWidth;
+				var dch1=div1.clientHeight;
+				var dch2=div2.clientHeight;
+				var w=e.clientX-L;
+				var h=e.clientY-T;
+				switch(change){
+					case 1:
+						div1.style.width=divw_ori+(e.clientX-cx)+'px';
+						break;
+					case -1:
+						div1.style.width=divw_ori-(e.clientX-cx)+'px';
+						div1.style.left=divol_ori+(e.clientX-cx)+'px';
+						break;
+					case 2:
+						div1.style.height=divh_ori+(e.clientY-cy)+'px';
+						break;
+					case -2:
+						div1.style.height=divh_ori-(e.clientY-cy)+'px';
+						div1.style.top=divot_ori+(e.clientY-cy)+'px';
+						break;
+				}
+				if(!change&&onoff){
+					if(h<0){
+						h=0;
+					}else if(h>window.innerHeight-div1.offsetHeight){
+						h=window.innerHeight-div1.offsetHeight;
+					}
+					if(w<0){
+						w=0;
+					}else if(w>window.innerWidth-div1.offsetWidth){
+						w=window.innerWidth-div1.offsetWidth;
+					}
+					div1.style.left=w+'px';
+					div1.style.top=h+"px";
+					if(dol1>dol2-dcw1&&dol1<dol2+dcw2&&dot1>dot2-dch1&&dot1<dot2+dch2){
+						div2.style.backgroundColor="pink";
+					}else{
+						div2.style.backgroundColor="orange";
+					}
+				
+				}
+				return false;
+			}
+			document.onmouseup=function(){
+				onoff=false;
+				change=false;
+				divw_ori=div1.offsetWidth;
+				divol_ori=div1.offsetLeft;
+				divh_ori=div1.offsetHeight;
+				divot_ori=div1.offsetTop;
+			}
+			
+			
+		}
+	</script>
+</html>

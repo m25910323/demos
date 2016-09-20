@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="box">
+			
+		</div>
+		<div></div>
+	</body>
+	<script>
+		window.onload=function(){
+			var box=document.getElementsByTagName('div');
+//			
+//			setInterval(time,1000);
+//			function time(){
+//				var d=new Date();
+//				box.innerHTML=d.getFullYear()+'年'+(d.getMonth()+1)+'月'+d.getDate()+'日'+d.getHours()+':'+d.getMinutes()+":"+d.getSeconds()+'星期'+d.getDay();
+//			}
+			var time1=new Date(2016,4,10);
+			var time2=new Date(2016,8,10);
+//			setInterval(cont,1000)
+//			function cont(){
+//				var current=new Date()-a;
+//				var day=parseInt(current/(24*3600000));
+//				var hours=parseInt(current%(24*3600000)/3600000);
+//				var minute=parseInt(current%(24*3600000)%3600000/60000);
+//				var second=parseInt(current%(24*3600000)%3600000%60000/1000);
+//				box.innerHTML="距离开学已有"+day+"天"+hours+"时"+minute+"分"+second+"秒";
+//			}
+			box[0].innerHTML="距离开学已有"+target(time1);
+			box[1].innerHTML="距离拜拜还剩"+target(time2);
+			function target(time){
+				var current=new Date()-time;
+				var day=parseInt(current/(24*3600000));
+				var hours=parseInt(current%(24*3600000)/3600000);
+				var minute=parseInt(current%(24*3600000)%3600000/60000);
+				var second=parseInt(current%(24*3600000)%3600000%60000/1000);
+				return Math.abs(day)+"天"+Math.abs(hours)+"时"+Math.abs(minute)+"分"+Math.abs(second)+"秒";
+			}
+			setInterval(function(){
+				box[0].innerHTML="距离开学已有"+target(time1);
+				box[1].innerHTML="距离拜拜还剩"+target(time2);
+			},1000)
+		}
+	</script>
+</html>

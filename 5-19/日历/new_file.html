@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.active{
+				background-color: pink;
+				color:#fff;
+			}
+		</style>
+	</head>
+	<body>
+		<table>
+			<thead>
+				<th>日</th>
+				<th>一</th>
+				<th>二</th>
+				<th>三</th>
+				<th>四</th>
+				<th>五</th>
+				<th>六</th>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+	</body>
+	<script>
+		window.onload=function(){
+			var tbody=document.getElementsByTagName('tbody');
+			var thtml="";
+			var d=1;
+			var date=new Date();
+			var year=date.getFullYear();
+			var month=date.getMonth();
+			var day=date.getDate();
+			var haha=new Date(year,month+1,1);
+			var days=new Date(haha-1).getDate();           /*当月总天数*/
+			var firstweek=new Date(year,month,1).getDay();      /*获取第一天是星期几*/
+//			console.log(hoho);
+			var row=Math.ceil((days+firstweek)/7);				/*判断共有多少行*/
+//			console.log(row);
+			var num=1-firstweek;
+			for(i=0;i<row;i++){
+				thtml+="<tr>";
+				for(j=0;j<7;j++){
+					if(num<1||num>days){
+						thtml+="<td></td>";
+					}else if(num==date.getDate()){
+						thtml+="<td class='active'>"+num+"</td>";
+					}else{
+						thtml+="<td>"+num+"</td>";
+					}
+					num++;
+				}
+				thtml+="</tr>";
+			}
+			tbody[0].innerHTML=thtml;
+		}
+	</script>
+</html>

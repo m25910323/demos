@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			li{
+				height: 30px;
+				line-height: 30px;
+			}
+		</style>
+	</head>
+	<body>
+		<ul id="ul">
+			<li>
+				<span>000</span>
+				<input type="button"  value="上移0" class="up">
+				<input type="button"  value="下移0" class="down">
+			</li>
+			<li>
+				<span>111</span>
+				<input type="button"  value="上移1" class="up">
+				<input type="button"  value="下移1" class="down">
+			</li>
+			<li>
+				<span>222</span>
+				<input type="button"  value="上移2" class="up">
+				<input type="button"  value="下移2" class="down">
+			</li>
+			<li>
+				<span>333</span>
+				<input type="button"  value="上移3" class="up">
+				<input type="button"  value="下移3" class="down">
+			</li>
+		</ul>
+	</body>
+	<script>
+		window.onload=function(){
+			function move(){
+				var ul=document.getElementById('ul');									//获取元素
+				var li=document.getElementsByTagName('li');
+				var up=document.getElementsByClassName('up');
+				var down=document.getElementsByClassName('down');
+				for(i=0;i<li.length;i++){												//遍历
+					up[i].index=i;														
+					down[i].index=i;
+					up[i].onclick=function(){											//设置上移点击事件
+						if(this.index!=0){												//如果不是第一个，删除当前li，并将当前li插入到上一个li前面
+							var addli=ul.children[this.index];
+							console.log(this.index);	
+							ul.removeChild(addli);
+							ul.insertBefore(addli,ul.children[this.index-1]);
+							move();														//递归，重新洗牌
+						}
+					}
+					down[i].onclick=function(){											//同理下移点击事件
+						if(this.index!=li.length){
+							var addli=ul.children[this.index];
+							console.log(this.index);
+							ul.removeChild(addli);
+							ul.insertBefore(addli,ul.children[this.index+1]);
+							move();
+						}
+					}
+				}
+			}
+			move();
+				
+		}
+	</script>
+</html>

@@ -1,0 +1,60 @@
+.clearfix:after{
+	display: block;
+	content: "";
+	clear: both;
+}
+section{
+	width: 580px;
+	position: relative;
+}
+ul{
+	margin: 0px;
+	padding:0px;
+	list-style: none;
+	position: absolute;
+	top: 300px;
+	left: 150px;
+}
+.pic{
+	width: 580px;
+	height: 326px;
+	background-image: url(img/0.jpg);
+}
+span{
+	box-sizing: border-box;
+	float: left;
+	width: 40px;
+	height: 40px;
+	border-radius: 20px;
+	background: rgba(166,166,166,0.3);
+	font-size: 30px;
+	line-height: 40px;
+	color: #fff;
+	padding-left: 10px;
+	position: absolute;
+	top: 150px;
+	cursor: pointer;
+}
+.right{
+	padding-left: 15px;
+	right: 0px;
+}
+li{
+	width:14px;
+	height: 14px;
+	border-radius: 7px;
+	background-color: orange;
+	float: left;
+	margin-right: 10px;
+	cursor: pointer;
+}
+.suolue{
+	width: 145px;
+	height: 80px;
+	border: 1px solid pink;
+	background-size: contain;
+	display: none;
+	position: absolute;
+	left: 80px;
+	top: 200px;
+}

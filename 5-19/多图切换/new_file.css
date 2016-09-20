@@ -1,0 +1,32 @@
+.clearfix:after{
+	display: block;
+	content: "";
+	clear: both;
+}
+.fl{
+	float: left;
+}
+.mr{
+	margin-right: 50px;
+}
+span{
+	display: inline-block;
+	width: 50px;
+	height: 30px;
+	color: #fff;
+	background-color: lightpink;
+	font: 14px/30px "微软雅黑";
+	text-align: center;
+}
+.left{
+	width: 580px;
+	height: 326px;
+	background-color: lightcyan;
+	background-image: url(img/0.jpg);
+}
+.right{
+	width: 326px;
+	height: 326px;
+	background-color: lightsalmon;
+	background-image: url(img/0.jpg);
+}

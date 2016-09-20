@@ -1,0 +1,63 @@
+section{
+	position: relative;
+}
+ul{
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+#left{
+	float: left;
+	width: 100px;
+	height: 400px;
+	
+}
+#left li{
+	box-sizing: border-box;
+	width: 100px;
+	height: 100px;
+	border:1px solid gray;
+	background-color: #000;
+	color: #fff;
+	text-align: center;
+	line-height: 100px;
+}
+#left .active{
+	background-color: red;
+	color: #000;
+}
+div{
+	width: 700px;
+	height: 400px;
+	float: left;overflow: hidden;
+	
+}
+.img{
+	height: 400px;
+}
+.img li{
+	width: 700px;
+	height: 400px;
+	float: left;
+}
+.img li img{
+	width: 700px;
+	height: 400px;
+}
+.bottom{
+	height: 30px;
+	position: absolute;
+	top: 370px;
+}
+.bottom li{
+	text-align: center;
+	color: #fff;
+	width: 175px;
+	height: 30px;
+	line-height: 30px;
+	float: left;
+	background-color: rgba(0,0,0,0.3);
+}
+.bottom .active{
+	background-color: rgba(255,0,0,0.5);
+}

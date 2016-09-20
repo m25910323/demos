@@ -1,0 +1,42 @@
+body{
+	margin: 0px;
+}
+.main{
+	display: flex;
+	width: 500px;
+	height: 500px;
+	border: 1px solid palegreen;
+	position: relative;
+	margin: 0 auto;
+}
+.main div{
+	width: 100px;
+	height: 100px;
+	background-color: paleturquoise;
+	position: absolute;
+	font: 48px/100px "微软雅黑";
+	color: #fff;
+	text-align: center;
+	transition: 2s;
+	
+}
+div:nth-child(1){
+	left: 0px;
+	top: 0px;
+}
+div:nth-child(2){
+	left: 100px;
+	top: 100px;
+}
+div:nth-child(3){
+	left: 200px;
+	top: 200px;
+}
+div:nth-child(4){
+	left: 100px;
+	top: 300px;
+}
+div:nth-child(5){
+	left: 0px;
+	top: 400px;
+}

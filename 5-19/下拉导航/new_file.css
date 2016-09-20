@@ -1,0 +1,35 @@
+.clearfix:after{
+	display: block;
+	content: "";
+	clear: both;
+}
+.main{
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+	font-family:"微软雅黑" ;
+	margin-bottom: 20px;
+}
+li{
+	float: left;
+	padding-left: 10px;
+	padding-right: 10px;
+	height: 30px;
+	line-height: 30px;
+	cursor: pointer;
+}
+li:hover{
+	background-color: pink;
+	color: #fff;
+}
+.first{
+	background-color: pink;
+	color: #fff;
+}
+.son{
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+	font-family:"微软雅黑" ;
+	display: none;
+}

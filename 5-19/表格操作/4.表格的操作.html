@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        /*
+        * 需求
+        *   1.填写表单，点击添加按钮，把表单中数据动态添加到表格中
+        *   2.自动生成编号（自增长）
+        *   3.隔行变色，注意：新加数据也要隔行变色 css/js各一套
+        *   4.删除指定行
+        *       编号不变
+        *       隔行变色
+        *
+        *
+        * 扩展
+        *   全选
+        *		上面全选checkAll和下面表格中的checkbox的对应关系，上下状态应该是同步的
+        *		选择高亮
+        *	上移下移
+        *		注意隔行变色的问题
+        *	排序
+        *		按年龄/编号 降序或升序排列
+        *	搜索 - 高亮
+        * */
+        
+    </script>
+</head>
+
+<body>
+    姓名:<input type="text" class="info" name="姓名"/>
+    年龄:<input type="text" class="info" name="年龄"/>
+    性别:<input type="text" class="info" name="性别"/>
+    <button id="submit">提交</button>
+    <br>
+    <br>
+
+	排序：
+	<select name="" id="sort_attr">
+		<option value="">编号</option>
+		<option value="">年龄</option>
+	</select>
+	<select name="" id="sort_way">
+		<option value="">降序</option>
+		<option value="">升序</option>
+	</select>
+	<button id="sort">提交</button>
+    <br><br>
+
+    搜索：
+    <input type="text" id="search_inp">
+    <button id="search">提交</button>
+    <br>
+    <br>
+
+    <table width="100%" border="1" id="tab">
+        <thead>
+            <tr>
+                <th><input type="checkbox" id="checkAll">全选</th>
+                <th>编号</th>
+                <th>姓名</th>
+                <th>年龄</th>
+                <th>性别</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</body>
+<script>
+	window.onload=function(){
+		var info=document.getElementsByClassName('info');
+		var sub=document.getElementById("submit");
+		var tab=document.getElementById("tab");
+		var th=document.getElementsByTagName('th');
+		var num=1;
+		var tbody=document.getElementsByTagName("tbody")[0];
+		var onoff=true;
+		var sort=document.getElementById('sort');
+		var sortattr=document.getElementById("sort_attr");
+		var sortway=document.getElementById('sort_way');
+		var search=document.getElementById('search');
+		var search_inp=document.getElementById('search_inp');
+		var checkAll=document.getElementById('checkAll');
+		var selnum=0;
+		sub.onclick=function(){															//点击提交，将信息添加到表格
+			var tr=document.createElement('tr');
+			tab.tBodies[0].appendChild(tr);
+			checkAll.checked=false;
+			for(i=0;i<th.length;i++){
+				var td=document.createElement("td");
+				for(j=0;j<info.length;j++){
+//					console.log(th[i].innerHTML,info[j].name);
+					if(th[i].innerHTML==info[j].name){
+						td.innerHTML=info[j].value;
+					}else if(th[i].innerHTML=="编号"){
+						td.innerHTML=num;
+					}else if(i==0){
+						td.innerHTML="<input type='checkbox'>";
+					}else if(i==th.length-1){
+						td.innerHTML="<a class='delete' href='javascript:;'>删除</a> <a class='top' href='javascript:;'>上移</a> <a class='bottom' href='javascript:;'>下移</a>"
+					}
+				}
+				tr.appendChild(td);
+			}
+			
+			
+			
+			num++;
+			changeColor();																	//隔行变色
+			del();
+			var trnumber=tbody.getElementsByTagName("tr");
+			var sel=tbody.getElementsByTagName("input");
+			selectedBright();
+			move();
+		}
+		
+		selectAll();
+		
+		
+		sort.onclick=function(){															//升序降序排列
+			var pos; 
+			var pos1;
+			var trnumber=tbody.getElementsByTagName("tr");
+			for(i=0;i<th.length;i++){
+			 	if(th[i].innerHTML=='编号'){
+			 		pos=i;
+			 	}
+			 	if(th[i].innerHTML=='年龄'){
+			 		pos1=i;
+			 	}
+			}
+			console.log(sortattr.selectedIndex,sortway.selectedIndex);
+			if(sortattr.options[sortattr.selectedIndex].text=="编号"&&sortway.options[sortway.selectedIndex].text=="降序"){
+				for(j=0;j<trnumber.length;j++){
+					var trnumber=tbody.getElementsByTagName("tr");
+					for(i=0;i<trnumber.length-1;i++){
+						if(parseFloat(trnumber[i].children[pos].innerHTML)<parseFloat(trnumber[i+1].children[pos].innerHTML)){
+							var a=trnumber[i+1];
+							tbody.removeChild(trnumber[i+1]);
+							tbody.insertBefore(a,trnumber[i]);
+						}
+					}
+				}
+			}else if(sortattr.options[sortattr.selectedIndex].text=="编号"&&sortway.options[sortway.selectedIndex].text=="升序"){
+				for(j=0;j<trnumber.length;j++){
+					var trnumber=tbody.getElementsByTagName("tr");
+					for(i=0;i<trnumber.length-1;i++){
+						if(parseFloat(trnumber[i].children[pos].innerHTML)>parseFloat(trnumber[i+1].children[pos].innerHTML)){
+							var a=trnumber[i+1];
+							tbody.removeChild(trnumber[i+1]);
+							tbody.insertBefore(a,trnumber[i]);
+						}
+					}
+				}
+			}else if(sortattr.options[sortattr.selectedIndex].text=="年龄"&&sortway.options[sortway.selectedIndex].text=="降序"){
+				for(j=0;j<trnumber.length;j++){
+					var trnumber=tbody.getElementsByTagName("tr");
+					for(i=0;i<trnumber.length-1;i++){
+						if(parseFloat(trnumber[i].children[pos1].innerHTML)<parseFloat(trnumber[i+1].children[pos1].innerHTML)){
+							var a=trnumber[i+1];
+							tbody.removeChild(trnumber[i+1]);
+							tbody.insertBefore(a,trnumber[i]);
+						}
+					}
+				}
+			}else{
+				for(j=0;j<trnumber.length;j++){
+					var trnumber=tbody.getElementsByTagName("tr");
+					for(i=0;i<trnumber.length-1;i++){
+						if(parseFloat(trnumber[i].children[pos1].innerHTML)>parseFloat(trnumber[i+1].children[pos1].innerHTML)){
+							var a=trnumber[i+1];
+							tbody.removeChild(trnumber[i+1]);
+							tbody.insertBefore(a,trnumber[i]);
+						}
+					}
+				}
+				
+			}
+			
+			changeColor();
+			
+			
+		}
+		
+		function move(){
+			
+			var top=document.getElementsByClassName('top');
+			var bottom=document.getElementsByClassName('bottom');
+			for(i=0;i<top.length;i++){
+				top[i].index=i;
+				bottom[i].index=i;
+				top[i].onclick=function(){											//设置上移点击事件
+					if(this.index!=0){												//如果不是第一个，删除当前li，并将当前li插入到上一个li前面
+						var addli=tbody.children[this.index];
+						tbody.removeChild(addli);
+						tbody.insertBefore(addli,tbody.children[this.index-1]);
+						changeColor();
+						move();														//递归，重新洗牌
+						selectedBright();
+					}
+				}
+				bottom[i].onclick=function(){											//同理下移点击事件
+					if(this.index!=top.length){
+						var addli=tbody.children[this.index];
+						console.log(this.index);
+						tbody.removeChild(addli);
+						tbody.insertBefore(addli,tbody.children[this.index+1]);
+						changeColor();
+						move();
+						selectedBright();
+					}
+				}
+			}
+		}
+		
+		function changeColor(){																//隔行变色
+			var trnumber=tbody.getElementsByTagName("tr");
+//			console.log(trnumber.length);
+			for(var i=0;i<trnumber.length;i++){
+				if(i%2==0){
+//					console.log(i);
+					trnumber[i].style.backgroundColor="gainsboro";
+				}else{
+					trnumber[i].style.backgroundColor="#fff";
+				}
+			}
+			del();
+		}
+		
+		function selectAll(){																	//全选
+			var trnumber=tbody.getElementsByTagName("tr");
+			
+			var sel=tbody.getElementsByTagName("input");
+			
+			checkAll.onclick=function(){
+				if(this.checked==true){
+					for(i=0;i<trnumber.length;i++){
+						sel[i].checked=true;
+						selnum=trnumber.length;
+						trnumber[i].style.backgroundColor="yellow";
+					}
+				}else{
+					for(i=0;i<trnumber.length;i++){
+						sel[i].checked=false;
+						selnum=0;
+						changeColor();
+					}
+				}
+			}
+			
+		}
+		
+		
+		function del(){																			//删除行
+			var trnumber=tbody.getElementsByTagName("tr");
+			var a =document.getElementsByClassName("delete");
+//			console.log(a.length);
+			for(var i=0;i<a.length;i++){
+				a[i].index=i;
+				a[i].onclick=function(){
+					tbody.removeChild(trnumber[this.index]);
+					changeColor();
+					selectedBright();
+				}
+			}
+		}
+		
+		function selectedBright(){																//选中高亮
+			var sel=tbody.getElementsByTagName("input");
+			var trnumber=tbody.getElementsByTagName("tr");
+			for(i=0;i<sel.length;i++){
+				sel[i].index=i;
+				console.log(this.index);
+				sel[i].onclick=function(){
+					console.log(this.index);
+					if(this.checked==true){
+						selnum++;
+						trnumber[this.index].style.backgroundColor='yellow';
+						
+					}else{
+						selnum--;
+						if(this.index%2==0){
+							trnumber[this.index].style.backgroundColor="gainsboro";
+						}else{
+							trnumber[this.index].style.backgroundColor="#fff";
+						}
+					}
+//					console.log(selnum);
+					if(selnum==sel.length){
+						checkAll.checked=true;
+					}else{
+						checkAll.checked=false;
+					}
+				}
+			}
+			
+		}
+		
+		search.onclick=function(){
+			changeColor();
+			var trnumber=tbody.getElementsByTagName("tr");
+			for(i=0;i<trnumber.length;i++){
+				if(trnumber[i].children[1].innerHTML==search_inp.value){
+					console.log(i);
+					trnumber[i].style.backgroundColor="yellow";
+					
+				}
+			}
+		}
+	}
+</script>
+</html>

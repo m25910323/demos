@@ -1,0 +1,26 @@
+body,h3{
+	margin: 0px;
+	font:14px "微软雅黑";
+}
+h3{
+	height:30px;
+	line-height: 30px;
+	width: 120px;
+	padding-left: 20px;
+	border: 1px solid #DCDCDC;
+	margin-bottom: -1px;
+	cursor: pointer;
+}
+div{
+	width: 140px;
+	height: 75px;
+	display: none;
+}
+div span{
+	height:24px;
+	width: 110px;
+	padding-left: 30px;
+	border: 1px solid #DCDCDC;
+	float: left;
+	margin-bottom: -1px;
+}

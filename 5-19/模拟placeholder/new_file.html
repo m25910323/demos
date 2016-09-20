@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			div{
+				position: relative;
+			}
+			span{
+				position: absolute;
+				top: 2px;
+				left: 4px;
+				height: 16px;
+				font-size: 14px;
+				color: gray;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			<input type="text" id="text"/>
+			<input type="text" id="text1" placeholder="ad"/>
+			<span>请输入用户名</span>
+		</div>
+		
+	</body>
+	<script>
+		window.onload=function(){
+			var txt=document.getElementById('text');
+			var span=document.getElementsByTagName('span')[0];
+			
+			span.onclick=function(){
+				txt.focus();
+			}
+			txt.onblur=function(){
+				if(this.value!=""){
+					span.style.display="none";
+				}else{
+					span.style.display="block";
+				}
+			}
+			txt.oninput=function(){
+				span.style.display="none";
+			}
+		}
+	</script>
+</html>

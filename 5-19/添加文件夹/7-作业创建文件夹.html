@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#content{
+				padding: 20px;
+			}
+			#content div{
+				width: 59px;
+				height: 51px;
+				padding: 20px;
+				margin-bottom: 10px;
+				margin-right: 20px;
+				background: url(img/folder.png) no-repeat center;
+				position: relative;
+				float: left;
+			}
+			#content div.active{
+				background: url(img/folder.png) #e0f0f0 no-repeat center;
+			}
+			#content div input:first-of-type{
+				position: absolute;
+				left: 0;
+				top: 0;
+				display: none;
+			}
+			#content div span{
+				position: absolute;
+				left: 0px;
+				width: 99px;
+				height: 21px;
+				line-height: 21px;
+				text-align: center;
+				top: 70px;
+				font:14px "微软雅黑";
+			}
+			#content div input:nth-of-type(2){
+				position: absolute;
+				left: 0px;
+				width: 99px;
+				height: 21px;
+				line-height: 21px;
+				text-align: center;
+				top: 70px;
+				font:14px "微软雅黑";
+			}
+		</style>
+	</head>
+	<body>
+		<input type="button" id="add" value="新建文件夹" />
+		<input type="button" id="del" value="删除选中文件夹" />
+		<div id="content">
+		</div>
+	</body>
+	<script>
+		window.onload=function(){
+			var add=document.getElementById('add');
+			var del=document.getElementById('del');
+			var con=document.getElementById('content');
+			var div=con.getElementsByTagName("div");
+			var num=1;
+			add.onclick=function(){
+				var odiv=document.createElement("div");
+				var inp=document.createElement("input");
+				var span=document.createElement("span");
+				span.innerHTML="新建文件夹"+num;
+				inp.setAttribute("type","checkbox");
+				con.appendChild(odiv);
+				odiv.appendChild(inp);
+				odiv.appendChild(span);
+				div=con.getElementsByTagName("div");
+				num++;
+				for(i=0;i<div.length;i++){
+					div[i].index=i;
+					div[i].onmouseover=function(){
+//						console.log(this.index);
+						var inpu=div[this.index].getElementsByTagName('input')[0];
+						this.setAttribute("class","active");
+						inpu.style.display="block";
+					}
+					div[i].onmouseout=function(){
+						var inpu=div[this.index].getElementsByTagName('input')[0];
+						if(inpu.checked){
+							this.setAttribute("class","active");
+							inpu.style.display="block";
+						}else{
+							this.setAttribute("class","");
+							inpu.style.display="none";
+						}
+						
+					}
+				}
+				rename();
+			}
+			
+			del.onclick=function(){
+				shanchu();
+				
+			}
+			
+			function shanchu(){
+//				div=con.getElementsByTagName("div");
+				var oInput=con.getElementsByTagName("input");
+				for(i=0;i<oInput.length;i++){
+					
+					if(oInput[i].checked){
+						con.removeChild(div[i]);
+						for(i=0;i<div.length;i++){
+							div[i].index=i;
+						}
+						shanchu();
+					}
+					
+				}
+				
+				
+			}
+			
+			function rename(){
+				var oSpan=document.getElementsByTagName("span");
+//				console.log(oSpan.length);
+				for(i=0;i<oSpan.length;i++){
+					oSpan[i].index=i;
+					oSpan[i].onclick=function(){
+						this.style.display="none";
+						var txt=document.createElement("input");
+						txt.setAttribute("type","text");
+						txt.setAttribute("class","txt");
+						txt.style.cssText="width: 80px;height: 14px";
+						var btn=document.createElement("input");
+						btn.setAttribute("type","button");
+						btn.setAttribute("class","sure");
+						btn.style.cssText="width:10px;height: 14px;position:absolute;right: 0px;top: 70px;";
+						div[this.index].appendChild(txt);
+						div[this.index].appendChild(btn);
+						var sure=div[this.index].getElementsByClassName('sure')[0];
+						var cont=div[this.index].getElementsByClassName('txt')[0];
+						var txt1=div[this.index].getElementsByClassName('txt')[0];
+						var btn1=div[this.index].getElementsByClassName('sure')[0];
+						sure.index=this.index;
+						
+						sure.onclick=function(){
+							var sum=0;
+							oSpan=document.getElementsByTagName("span");
+							for(i=0;i<oSpan.length;i++){
+								if(cont.value==oSpan[i].innerHTML){
+									alert("有重名");
+								}else{
+									sum++;
+									console.log(sum);
+								}
+							}
+							if(sum==oSpan.length){
+								oSpan[this.index].style.display="block";
+								oSpan[this.index].innerHTML=cont.value;
+								div[this.index].removeChild(txt1);
+								div[this.index].removeChild(btn1);
+								sum=0;
+							}
+						}
+					}
+				}
+			}
+			
+		}
+	</script>
+</html>

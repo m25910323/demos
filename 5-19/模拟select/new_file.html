@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body{
+				font-family: "微软雅黑";
+			}
+			dl,dd{
+				margin: 0px;
+			}
+			dl{
+				width: 300px;
+				border: 1px solid orange;
+				display: none;
+			}
+			#txt{
+				width: 300px;
+				height: 30px;
+				border: 1px solid orange;
+				outline: none;
+				
+			}
+			.active{
+				background-color: orange;
+				color: #fff;
+			}
+			.mark{
+				border-radius: 6px;
+				background-color: rgba(100,150,250,0.5);
+				float: left;
+				height: 24px;	
+				line-height: 24px;
+				padding-left: 8px;
+				padding-right: 8px;
+				color: #fff;
+				margin-top: 3px;
+				margin-right: 5px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="txt">
+			<!--<span class='mark'>打算</span>-->
+		</div>
+		<dl id="dl">
+			<dt><input type="text" /></dt>
+			<dd>html</dd>
+			<dd>css</dd>
+			<dd>javascript</dd>
+			<dd>C#</dd>
+			<dd>linux</dd>
+		</dl>
+	</body>
+	<script>
+		window.onload=function(){
+			var txt=document.querySelector('#txt');
+			var dl=document.querySelector('#dl');
+			var dd=dl.getElementsByTagName('dd');
+			var dt=dl.getElementsByTagName('dt')[0];
+			var search=dl.getElementsByTagName('input')[0];
+			var arry=['html','css','javascript','C#','linux'];
+			var arry1=[];
+			txt.onclick=function(e){
+				dl.style.display="block";
+				e.cancelBubble=true;
+			}
+			document.onclick=function(){
+				dl.style.display="none";
+			}
+			
+			ddopearte();
+			function ddopearte(){
+				dd=dl.getElementsByTagName('dd');
+				for(i=0;i<dd.length;i++){
+					dd[i].onoff=true;
+					dd[i].index=i;
+					dd[i].onmouseover=function(){
+						console.log(this.index);
+						for(var i=0;i<dd.length;i++){
+							if(dd[i].onoff){
+								dd[i].className="";
+							}else{
+								dd[i].className="active";
+							}
+						}
+						this.className="active";
+					}
+					
+					dd[i].onclick=function(e){
+						e.cancelBubble=true;
+						if(this.onoff){
+							var span=document.createElement('span');
+							span.innerHTML=this.innerHTML;
+							span.className="mark";
+							txt.appendChild(span);
+							
+							this.className="active";
+							this.onoff=false;
+						}else{
+							var div_child=document.getElementsByTagName('span');
+							for(var i=0;i<div_child.length;i++){
+								if(div_child[i].innerHTML==this.innerHTML){
+									txt.removeChild(div_child[i]);
+								}
+							}
+							this.className="";
+							this.onoff=true;
+						}
+						
+					}
+				}
+			}
+			
+			dt.onclick=function(e){
+				e.cancelBubble=true;
+			}
+			search.oninput=function(e){
+				e.cancelBubble=true;
+				for(i=0;i<dd.length;i++){
+					if(dd[i].innerHTML.substring(0,this.value.length)!=this.value){
+						dd[i].style.display="none";
+					}else{
+						dd[i].style.display="block";
+					}
+				}
+			}
+			
+			document.onkeyup=function(e){
+//				console.log(e.keyCode);
+				var a=true;
+				
+				if(e.keyCode==13){
+					
+					for(i=0;i<dd.length;i++){
+						dd[i].style.display='block';
+						if(search.value==dd[i].innerHTML){
+							a=false;
+						}
+					}
+					if(a==true){
+						var adddd=document.createElement('dd');
+						adddd.innerHTML=search.value;
+						adddd.className='active';
+						adddd.onoff=false;
+						var span=document.createElement('span');
+						span.innerHTML=search.value;
+						span.className="mark";
+						txt.appendChild(span);
+						dl.appendChild(adddd);
+						adddd.onclick=function(){
+							if(this.onoff){
+								var span=document.createElement('span');
+								span.innerHTML=this.innerHTML;
+								span.className="mark";
+								txt.appendChild(span);
+								
+								this.className="active";
+								this.onoff=false;
+							}else{
+								var div_child=document.getElementsByTagName('span');
+								for(var i=0;i<div_child.length;i++){
+									if(div_child[i].innerHTML==this.innerHTML){
+										txt.removeChild(div_child[i]);
+									}
+								}
+								this.className="";
+								this.onoff=true;
+							}
+							
+						}
+						adddd.onmouseover=function(){
+							console.log(this.index);
+							for(var i=0;i<dd.length;i++){
+								if(dd[i].onoff){
+									dd[i].className="";
+								}else{
+									dd[i].className="active";
+								}
+							}
+							this.className="active";
+						}
+					}else{
+						for(i=0;i<dd.length;i++){
+							if(dd[i].innerHTML.substring(0,search.value.length)!=search.value){
+								dd[i].style.display="none";
+							}else{
+								dd[i].style.display="block";
+							}
+						}
+					}
+				}
+			}
+		}
+		
+	</script>
+</html>

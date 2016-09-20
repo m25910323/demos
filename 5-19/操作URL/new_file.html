@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script>
+		var str="http://item.taobao.com /item.htm?a=1&b=2&c=&d=xxx&e&f=hd";
+		var body=document.getElementsByTagName('body');
+		var a = str.indexOf('?');									/*获取？是第几个字符*/
+		var b = str.substring(a+1);									/*截取?后面的字符*/
+		var c = b.split('&');										/*通过&分割成数组*/
+		var d = b.split('&').length;								/*数组长度*/
+		var arr=[];
+		var obj=new Object();
+		var pro={};
+		var value={};
+		for(i=0;i<d;i++){
+			var e=c[i].split('=');
+			arr[i]=[e[0],e[1]];
+		}
+//		console.log(arr); 
+//		console.log(arr[0][0]);
+//		console.log(d);
+		for(i=0;i<d;i++){
+//			console.log(arr[i][0]);
+			pro[i]=arr[i][0];
+			value[i]=arr[i][1];
+			obj[pro[i]]=value[i];
+//			console.log(pro[i]);
+//			console.log(value[i]);
+		}
+		console.log(obj);
+	</script>
+</html>

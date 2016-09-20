@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#small{
+				width: 350px;
+				height: 350px;
+				background-image: url(small.jpg);
+				position: relative;
+			}
+			#mask{
+				width: 175px;
+				height: 175px;
+				background-color: rgba(25,255,32,0.4);
+				position: absolute;
+				cursor: move;
+				display: none;
+				float: left;
+			}
+			#big{
+				width: 400px;
+				height: 400px;
+				border: 1px solid black;
+				display: none;
+				position: absolute;
+				left: 400px;
+				top: 0px;
+				overflow: hidden;
+			}
+			img{
+				position: absolute;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<div id="small">
+			<span id="mask"></span>
+		</div>
+		<div id="big">
+			<img src="big.jpg"> 
+		</div>
+	</body>
+	<script>
+		window.onload=function(){
+			var small=document.getElementById('small');
+			var big=document.getElementById('big');
+			var mask=document.getElementById('mask');
+			var img=document.getElementsByTagName('img')[0];
+			small.onmouseout=function(){
+				mask.style.display='none';
+				big.style.display='none';
+			}
+			small.onmouseover=function(){
+				mask.style.display='block';
+				big.style.display='block';
+			}
+			small.onmousemove=function(e){
+				var l=e.clientX-mask.clientWidth/2-small.getBoundingClientRect().left;
+				var t=e.clientY-mask.clientHeight/2-small.getBoundingClientRect().top;
+				if(l<0){
+					l=0;
+				}
+				if(l>small.clientWidth-mask.clientWidth){
+					l=small.clientWidth-mask.clientWidth;
+				}
+				if(t<0){
+					t=0;
+				}
+				if(t>small.clientHeight-mask.clientHeight){
+					t=small.clientHeight-mask.clientHeight;
+				}
+//				console.log(small.getBoundingClientRect().left);
+				mask.style.left=l+'px';
+				mask.style.top=t+'px';
+				
+				img.style.left=-l*img.clientWidth/small.clientWidth+'px';
+				img.style.top=-t*img.clientHeight/small.clientHeight+'px';
+			}
+		}
+	</script>
+</html>

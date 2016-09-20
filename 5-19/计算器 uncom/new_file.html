@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="text" />
+		<select name="">。
+			<option value="jia" name="suan">+</option>
+			<option value="jian" name="suan">-</option>
+			<option value="cheng" name="suan">*</option>
+			<option value="chu" name="suan">/</option>
+		</select>
+		<input type="text" />
+		<input type="button" name="" id="equal" value="=" />
+		<span></span>
+	</body>
+	<script>
+		var equal=document.getElementById('equal');
+		var inp=document.getElementsByTagName('input');
+		var span=document.getElementsByTagName('span');
+		var sel=document.getElementsByTagName('select');
+		var a=sel[0].value;
+		equal.onclick=function(){
+			if(inp[0].value==''){
+				alert("请输入第一个数");
+			}
+			if(inp[1].value==''){
+				alert("请输入第二个数");
+			}
+			if(isNaN(inp[0].value)){
+				alert("请输入第一个数字");
+			}
+			if(isNaN(inp[1].value)){
+				alert("请输入第二个数字");
+			}
+//			if(sel[0].value=="jia"){
+//				span[0].innerHTML=parseFloat(inp[0].value)+parseFloat(inp[1].value);
+//			}else if(sel[0].value=="jian"){
+//				span[0].innerHTML=parseFloat(inp[0].value)-parseFloat(inp[1].value)
+//			}else if(sel[0].value=="cheng"){
+//				span[0].innerHTML=parseFloat(inp[0].value)*parseFloat(inp[1].value)
+//			}else if(sel[0].value=="chu"){
+//				span[0].innerHTML=parseFloat(inp[0].value)/parseFloat(inp[1].value)
+//			}
+			switch(a){
+				case "jian":
+				span[0].innerHTML=parseFloat(inp[0].value)-parseFloat(inp[1].value);
+				alert(a);
+//				break;
+				case "jia":
+				span[0].innerHTML=parseFloat(inp[0].value)+parseFloat(inp[1].value);
+//				break;
+				case "cheng":
+				span[0].innerHTML=parseFloat(inp[0].value)*parseFloat(inp[1].value);
+//				break;
+				case "chu":
+				span[0].innerHTML=parseFloat(inp[0].value)/parseFloat(inp[1].value);
+//				break;
+			}
+		}
+	</script>
+</html>

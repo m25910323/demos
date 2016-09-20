@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<textarea id="area"></textarea>
+		<input type="button" name="" id="btn" value="发布留言" />
+		<ul id="mess"></ul>
+	</body>
+	<script>
+		window.onload=function(){
+			var tarea=document.getElementById('area');
+			var btn=document.getElementById('btn');
+			var mess=document.getElementById('mess');
+			btn.onclick=function(){
+				console.log(tarea.value);
+				var li=document.createElement('li');
+				li.innerHTML=tarea.value;
+				mess.insertBefore(li,mess.children[0]);
+			}
+		}
+	</script>
+</html>

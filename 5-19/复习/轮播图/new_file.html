@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body,ul{
+				margin: 0px;
+			}
+			ul{
+				float: left;
+				list-style: none;
+				padding: 0px;
+				width: 1424px;
+				position: absolute;
+				top: 0px;
+				left: 0px;
+			}
+			li{
+				float: left;
+			}
+			img{
+				vertical-align: top;
+			}
+			div{
+				width: 712px;
+				height: 108px;
+				overflow: hidden;
+				position: relative;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			<ul>
+				<li><img src="img/1.jpg"></li>
+				<li><img src="img/2.jpg"></li>
+				<li><img src="img/3.jpg"></li>
+				<li><img src="img/4.jpg"></li>
+				<li><img src="img/1.jpg"></li>
+				<li><img src="img/2.jpg"></li>
+				<li><img src="img/3.jpg"></li>
+				<li><img src="img/4.jpg"></li>
+			</ul>
+		</div>
+		
+	</body>
+	<script>
+		window.onload=function(){
+			var ul=document.getElementsByTagName('ul')[0];
+			var num=0;
+			setInterval(move,30);
+			function move(){
+				num+=2;
+				ul.style.left=-num+'px';
+				if(num==712){
+					ul.style.left='0px';
+					num=0;
+				}
+			}
+		}
+	</script>
+</html>

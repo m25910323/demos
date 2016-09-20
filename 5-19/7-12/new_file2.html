@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			div{
+				width: 100px;
+				height: 200px;
+				position: absolute;
+				top: 30px;
+				border: 1px solid black;
+				background-color: #fff;
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<input type="button" value="显示" id="btn"/>
+		<div id="div"></div>
+		
+	</body>
+	<script>
+		window.onload=function(){
+			for(i=1;i<100;i++){
+				var p=document.createElement('p');
+				p.innerHTML=i;
+				document.body.appendChild(p);
+			}
+			var btn=document.getElementById('btn');
+			var div=document.getElementById('div');
+			var onoff=true;
+			btn.onclick=function(e){
+				if(onoff){
+					div.style.display="block";
+					onoff=false;
+				}else{
+					div.style.display="none";
+					onoff=true;
+				}
+				
+				e.cancelBubble=true;
+				
+			}
+//			document.onclick=function(){
+//				setTimeout(function(){
+//					div.style.display="none";
+//				},500)
+//				
+//			}
+			document.onclick=function(){
+				div.style.display="none";
+				onoff=true;
+			}
+		}
+	</script>
+</html>

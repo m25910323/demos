@@ -1,0 +1,30 @@
+ul{
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+	height: 50px;
+	width: 500px;
+	border: 1px solid #000;
+	position: relative;
+	z-index: 2;
+}
+li{
+	float: left;
+	width: 50px;
+	height: 50px;
+	text-align: center;
+	line-height: 50px;
+	top: 0px;
+	font-size: 30px;
+	position: relative;
+	top: 0px;
+}
+#hua{
+	height: 50px;
+	position: absolute;
+	background-color: deepskyblue;
+	
+}
+#main{
+	position: relative;
+}

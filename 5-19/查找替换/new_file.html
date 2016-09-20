@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style>
+		section{
+			font-family: "微软雅黑";
+			width: 500px;
+			height: 300px;
+			position: relative;
+			background-color: rgb(239,239,239) ;
+		}
+		#para{
+			width: 400px;
+			height: 200px;
+			border: 1px solid pink;
+			background-color: #fff;
+		}
+		#choice{
+			position: absolute;
+			width: 75px;
+			height: 30px;
+			left: 420px;
+			top: 10px;
+			background-color: rgb(200,200,200);
+			text-align: center;
+			line-height: 30px;
+		}
+		#hidden{
+			position: absolute;
+			width: 75px;
+			height: 60px;
+			left: 420px;
+			top:40px;
+			display: none;
+		}
+		#hidden span{
+			width: 75px;
+			height: 30px;
+			display: block;
+			text-align: center;
+			line-height: 30px;
+		}
+		#func{
+			height: 80px;
+			display: none;
+		}
+		#func div:first-of-type{
+			margin-top: 20px;
+			height: 25px;
+			line-height: 25px;
+			border-bottom: 5px solid gray;
+		}
+		#search,#replace{
+			width: 50px;
+			height: 25px;
+			display: inline-block;
+			text-align: center;
+		}
+		.active{
+			background-color: rgb(200,200,200);
+		}
+		#replace_inp{
+			display: none;
+		}
+	</style>
+	<body>
+		<section>
+			<div id="para"></div>
+			<span id="choice">展开</span>
+			<div id="hidden">
+				<span>查找</span>
+				<span>替换</span>
+			</div>
+			<div id="func">
+				<div>
+					<span id="search" class="active">查找</span>
+					<span id="replace">替换</span>
+				</div>
+				<div id="search_inp">
+					<input type="text" id="shtml" />
+					<input type="button" value="查找" id="sbutton" />
+				</div>
+				<div id="replace_inp">
+					<input type="text" name="" id="rehtml" />
+					<input type="button" value="替换" id="rebutton" />
+					<input type="text" name="" id="rehtml2" />
+				</div>
+			</div>
+		</section>
+	</body>
+	<script>
+		window.onload=function(){
+			var para=document.getElementById("para");
+			var choice=document.getElementById("choice");
+			var hidden=document.getElementById("hidden");
+			var span=hidden.getElementsByTagName("span");
+			var func=document.getElementById("func");
+			var search=document.getElementById("search");
+			var replace=document.getElementById("replace");
+			var search_inp=document.getElementById("search_inp");
+			var replace_inp=document.getElementById("replace_inp");
+			var sbutton=document.getElementById("sbutton");
+			var rebutton=document.getElementById("rebutton");
+			para.innerHTML="一个性工作者不愿离开的地方腿长4米！蒋欣的腿逆天了中国水喷闯岛插旗菲团体 快艇追赶>中国足球宝贝亮相世界舞台";
+			var begin=para.innerHTML;
+			
+			choice.onclick=function(){
+				hidden.style.display="block";
+			}
+			for(i=0;i<span.length;i++){
+				span[i].index=i;
+				span[i].onclick=function(){
+					hidden.style.display="none";
+					func.style.display="block";
+					if(this.index==0){
+						replace.className="none"
+						search.className="active";
+						replace_inp.style.display="none";
+						search_inp.style.display="block";
+					}else{
+						replace.className="active"
+						search.className="none";
+						replace_inp.style.display="block";
+						search_inp.style.display="none";
+					}
+				}
+			}
+			replace.onclick=function(){
+				this.className="active";
+				search.className="none";
+				replace_inp.style.display="block";
+				search_inp.style.display="none";
+			}
+			search.onclick=function(){
+				this.className="active";
+				replace.className="none";
+				replace_inp.style.display="none";
+				search_inp.style.display="block";
+			}
+			sbutton.onclick=function(){
+				var shtml=document.getElementById("shtml").value;
+				if(shtml==""){
+					alert("请输入查找内容");
+				}
+				if(para.innerHTML.indexOf(shtml)==-1){
+					alert("没有找到结果");
+				}
+				var innerHtml=para.innerHTML;
+				var arr=innerHtml.split(shtml);
+				
+				para.innerHTML="";
+				for(i=0;i<arr.length;i++){
+					if(i<arr.length-1){
+						para.innerHTML+=arr[i]+"<span style='background-color:yellow'>"+shtml+"</span>";
+					}else{
+						para.innerHTML+=arr[i];
+					}
+				}
+			}
+			rebutton.onclick=function(){
+				var rehtml=document.getElementById("rehtml").value;
+				var rehtml2=document.getElementById("rehtml2").value;
+				var innerHtml=para.innerHTML;
+				var arr=innerHtml.split(rehtml);
+				para.innerHTML="";
+				for(i=0;i<arr.length;i++){
+					if(i<arr.length-1){
+						para.innerHTML+=arr[i]+"<span style='background-color:red'>"+rehtml2+"</span>";
+					}else{
+						para.innerHTML+=arr[i];
+					}
+				}
+				console.log(para.innerHTML);
+			}
+		}
+	</script>
+</html>

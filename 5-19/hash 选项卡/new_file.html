@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			span{
+				width: 50px;
+				height: 30px;
+				line-height: 30px;
+				text-align: center;
+				display: inline-block;
+				cursor: pointer;
+			}
+			span:hover{
+				background-color: gainsboro;
+			}
+			div{
+				width: 200px;
+				height: 200px;
+				display: none;
+				border: 1px solid black;
+			}
+			.active{
+				display: block;
+			}
+			.active1{
+				background-color: gainsboro;
+			}
+		</style>
+	</head>
+	<body>
+		<span class="active1">选项1</span>
+		<span>选项2</span>
+		<span>选项3</span>
+		<span>选项4</span>
+		<div class="active">内容1</div>
+		<div>内容2</div>
+		<div>内容3</div>
+		<div>内容4</div>
+	</body>
+	<script>
+//		var span=document.getElementsByTagName('span');
+//		var div=document.getElementsByTagName('div');
+//		for(i=0;i<span.length;i++){
+//			span[i].index=i+1;
+//			span[i].onclick=function(){
+//				window.location.href="#tab="+this.index;
+//				for(var i=0;i<div.length;i++){
+//					div[i].style.display="none";
+//					span[i].className='';
+//				}
+//				div[this.index-1].style.display='block';
+//				span[this.index-1].className='active1';
+//			}
+//		}
+//		window.onhashchange=function(){
+//			var hash=window.location.hash.split('=')[1];
+//			console.log(hash);
+//			for(var i=0;i<div.length;i++){
+//				div[i].style.display="none";
+//				span[i].className='';
+//			}
+//			div[hash-1].style.display='block';
+//			span[hash-1].className='active1';
+//			
+//		}
+        card();
+		function card(){
+			var span=document.getElementsByTagName('span');
+			var div=document.getElementsByTagName('div');
+			var a;
+			div[0].style.display="block";
+			span[0].className="active1";	
+			for(i=0;i<span.length;i++){
+				
+				span[i].index=i+1;
+				span[i].onclick=function(){
+					console.log(i);
+					window.location.href="?tab="+this.index;
+				}
+				if(i!=0){
+					var url=window.location.search.split('=')[1];
+					console.log(url);
+					div[0].style.display="none";
+					span[0].className="";
+					div[url-1].style.display="block";
+					span[url-1].className="active1";
+				}
+				
+			}
+		}
+		
+	</script>
+</html>

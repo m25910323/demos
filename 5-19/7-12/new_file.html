@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<style>
+			ul{
+				margin: 0px;
+				padding: 0px;
+			}
+		</style>
+	</head>
+	<body>
+		<input type="button" value="添加" id="btn">
+		<ul></ul>
+	</body>
+	<script>
+		window.onload=function(){
+			var i=0;
+			var btn=document.getElementById('btn');
+			var ul=document.getElementsByTagName('ul')[0];
+			btn.onclick=function(){
+				var li=document.createElement('li');
+				li.innerHTML=i;
+				ul.appendChild(li);
+				i++;
+			}
+			ul.onclick=function(e){
+				console.log(e);
+				e.target.style.backgroundColor='pink';
+			}
+		}
+	</script>
+</html>
